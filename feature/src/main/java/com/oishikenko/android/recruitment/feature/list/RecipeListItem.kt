@@ -1,5 +1,6 @@
 package com.oishikenko.android.recruitment.feature.list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -8,17 +9,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.oishikenko.android.recruitment.data.model.CookingRecord
+import com.oishikenko.android.recruitment.feature.R
 
 @Composable
 fun RecipeListItem(
     cookingRecord: CookingRecord
 ) {
+    val navController = rememberNavController()
+    val value = cookingRecord.toString()
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -26,7 +32,10 @@ fun RecipeListItem(
             .padding(
                 horizontal = 16.dp,
                 vertical = 8.dp,
-            ),
+            )
+            .clickable {
+                navController.navigate("RecipeScreen/$value")
+            }
     ) {
         AsyncImage(
             model = cookingRecord.imageUrl,
@@ -34,7 +43,8 @@ fun RecipeListItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(96.dp)
-                .clip(RoundedCornerShape(4.dp)),
+                .clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp)),
+            placeholder = debugPlaceholder(debugPreview = R.drawable.recipe_1),
         )
         Column(
             verticalArrangement = Arrangement.Center,
@@ -46,11 +56,13 @@ fun RecipeListItem(
                 text = cookingRecord.recipeType,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.black_text)
             )
             Text(
                 text = cookingRecord.recordedAt,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,
+                color = colorResource(id = R.color.gray)
             )
         }
     }

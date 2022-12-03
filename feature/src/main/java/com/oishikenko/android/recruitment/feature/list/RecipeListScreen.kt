@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -43,6 +44,7 @@ fun RecipeListScreen(
                         text = stringResource(id = R.string.cooking_records_title),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
+                        color = colorResource(id = R.color.black_text),
                         modifier = Modifier.padding(end = 8.dp)
                     )
                     Image(
