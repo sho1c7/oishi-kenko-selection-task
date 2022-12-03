@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black_text">#333333</color>
+    <color name="gray">#676767</color>
+    <color name="bg_recipe_type">#063A77</color>
+</resources>
