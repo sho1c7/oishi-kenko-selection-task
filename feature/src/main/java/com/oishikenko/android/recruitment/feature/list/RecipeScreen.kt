@@ -17,17 +17,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.oishikenko.android.recruitment.data.model.CookingRecord
 import com.oishikenko.android.recruitment.feature.R
 
 @Composable
 fun RecipeScreen(
-    cookingRecord: CookingRecord?
+    cookingRecord: CookingRecord?,
+    onClick: () -> Unit,
 ) {
     Scaffold(
-        topBar =  { RecipeTopAppBar() },
+        topBar =  { RecipeTopAppBar(onClick) },
         content = { innerPadding ->
             Column(
                 modifier = Modifier
@@ -86,8 +86,9 @@ fun RecipeScreen(
 }
 
 @Composable
-fun RecipeTopAppBar() {
-    val navController = rememberNavController()
+fun RecipeTopAppBar(
+    onClick: () -> Unit
+) {
     TopAppBar(
         title = { Text(
             text = stringResource(id = R.string.recipe_screen_title),
@@ -97,11 +98,7 @@ fun RecipeTopAppBar() {
             modifier = Modifier.padding(start = 20.dp)
         ) },
         navigationIcon = {
-            IconButton(
-                onClick = {
-                    navController.navigateUp()
-                }
-            ) {
+            IconButton( onClick = onClick ) {
                 Icon(
                     painterResource(id = R.drawable.arrow_back),
                     contentDescription = "back button",
@@ -181,6 +178,6 @@ fun PreviewRecipeScreen(){
             comment = "豚肉のコクとごぼうの香り、野菜の甘みで奥行きのある味わい。",
             recipeType = "soup",
             recordedAt = "2018-05-01 17:57:31"
-        ))
+        )) {}
     }
 }

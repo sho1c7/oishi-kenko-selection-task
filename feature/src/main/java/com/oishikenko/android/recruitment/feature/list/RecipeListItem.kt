@@ -14,17 +14,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.oishikenko.android.recruitment.data.model.CookingRecord
 import com.oishikenko.android.recruitment.feature.R
+import java.net.URLEncoder
 
 @Composable
 fun RecipeListItem(
-    cookingRecord: CookingRecord
+    cookingRecord: CookingRecord,
+    onClick: (String) -> Unit,
 ) {
-    val navController = rememberNavController()
-    val value = cookingRecord.toString()
+    val value = CookingRecord.serialize(cookingRecord)
+    val encodedValue = URLEncoder.encode(value, "utf-8")
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -34,7 +35,7 @@ fun RecipeListItem(
                 vertical = 8.dp,
             )
             .clickable {
-                navController.navigate("RecipeScreen/$value")
+                onClick(encodedValue)
             }
     ) {
         AsyncImage(
@@ -77,6 +78,6 @@ fun PreviewRecipeListItem() {
             comment = "豚肉のコクとごぼうの香り、野菜の甘みで奥行きのある味わい。",
             recipeType = "soup",
             recordedAt = "2018-05-01 17:57:31"
-        )
-    )
+        ),
+    ) {}
 }

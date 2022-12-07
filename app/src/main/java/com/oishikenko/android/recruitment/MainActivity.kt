@@ -1,6 +1,7 @@
 package com.oishikenko.android.recruitment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.NavType
@@ -11,8 +12,8 @@ import androidx.navigation.navArgument
 import com.oishikenko.android.recruitment.data.model.CookingRecord
 import com.oishikenko.android.recruitment.feature.list.RecipeListScreen
 import com.oishikenko.android.recruitment.feature.list.RecipeScreen
-import com.oishikenko.android.recruitment.ui.theme.RecruitmentTheme
 import dagger.hilt.android.AndroidEntryPoint
+import java.net.URLDecoder
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -20,20 +21,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "listScreen") {
-                composable(route = "listScreen") {
-                    RecruitmentTheme {
-                        RecipeListScreen()
+            NavHost(navController = navController, startDestination = "recipeList") {
+                composable(route = "recipeList") {
+                    RecipeListScreen() { value: String ->
+                        navController.navigate("recipeDetail/$value")
                     }
                 }
                 composable(
-                    route = "RecipeScreen/{value}",
-                    arguments = listOf(navArgument("value") { type = NavType.Companion.StringType })
+                    route = "recipeDetail/{encodedValue}",
+                    arguments = listOf(navArgument("encodedValue") { type = NavType.Companion.StringType })
                 ) {
-                    val value = it.arguments?.getString("value")
-                    val cookingRecord: CookingRecord? = CookingRecord.parseValue(value)
-                    RecruitmentTheme {
-                        RecipeScreen(cookingRecord)
+                    val encodedValue = it.arguments?.getString("encodedValue")
+                    val value = URLDecoder.decode(encodedValue, "utf-8")
+                    val cookingRecord: CookingRecord? = CookingRecord.parse(value)
+                    RecipeScreen(cookingRecord) {
+                        navController.navigateUp()
                     }
                 }
             }
