@@ -1,5 +1,6 @@
 package com.oishikenko.android.recruitment.feature.list
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -50,6 +52,11 @@ fun RecipeListItem(
                 horizontal = 16.dp,
                 vertical = 8.dp,
             )
+            .border(
+                width = 1.dp,
+                color = Color.LightGray,
+                shape = RoundedCornerShape(8.dp)
+            )
             .clickable {
                 onClick(encodedValue)
             }
@@ -60,7 +67,7 @@ fun RecipeListItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(96.dp)
-                .clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp)),
+                .clip(RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)),
             placeholder = debugPlaceholder(debugPreview = R.drawable.recipe_1),
         )
         Column(
