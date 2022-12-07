@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,21 @@ fun RecipeListItem(
 ) {
     val value = CookingRecord.serialize(cookingRecord)
     val encodedValue = URLEncoder.encode(value, "utf-8")
+
+    val recipeTypeName: String = when (cookingRecord.recipeType) {
+        "main_dish" -> {
+            stringResource(id = R.string.recipe_type_main_dish)
+        }
+        "side_dish" -> {
+            stringResource(id = R.string.recipe_type_side_dish)
+        }
+        "soup" -> {
+            stringResource(id = R.string.recipe_type_soup)
+        }
+        else -> {
+            ""
+        }
+    }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -54,7 +70,7 @@ fun RecipeListItem(
                 .fillMaxWidth()
         ) {
             Text(
-                text = cookingRecord.recipeType,
+                text = recipeTypeName,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(id = R.color.black_text)

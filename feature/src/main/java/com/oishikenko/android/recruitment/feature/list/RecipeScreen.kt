@@ -126,21 +126,21 @@ fun RecipeType(
         "main_dish" -> {
             imageId = R.drawable.main_dish
             contentDesc = "主菜/主食"
-            recipeType = R.string.recipe_type_1
+            recipeType = R.string.recipe_type_main_dish
         }
         "side_dish" -> {
             imageId = R.drawable.side_dish
             contentDesc = "副菜"
-            recipeType = R.string.recipe_type_2
+            recipeType = R.string.recipe_type_side_dish
         }
         "soup" -> {
             imageId = R.drawable.soup
             contentDesc = "スープ"
-            recipeType = R.string.recipe_type_3
+            recipeType = R.string.recipe_type_soup
         } else -> {
             imageId = R.drawable.main_dish
             contentDesc = "主菜/主食"
-            recipeType = R.string.recipe_type_1
+            recipeType = R.string.recipe_type_main_dish
         }
     }
     Row(

@@ -2,7 +2,7 @@
 <resources>
     <string name="cooking_records_title">わたしの料理記録</string>
     <string name="recipe_screen_title">レシピ</string>
-    <string name="recipe_type_1">主菜/主食</string>
-    <string name="recipe_type_2">副菜</string>
-    <string name="recipe_type_3">スープ</string>
+    <string name="recipe_type_main_dish">主菜/主食</string>
+    <string name="recipe_type_side_dish">副菜</string>
+    <string name="recipe_type_soup">スープ</string>
 </resources>
